@@ -63,9 +63,19 @@ public class BrokerProperties {
 	private boolean soKeepAlive = true;
 
 	/**
+	 * 集群配置, 是否基于组播发现, 默认开启
+	 */
+	private boolean enableMulticastGroup = true;
+
+	/**
 	 * 集群配置, 基于组播发现
 	 */
 	private String multicastGroup;
+
+	/**
+	 * 集群配置, 当组播模式禁用时, 使用静态IP开启配置集群
+	 */
+	private String staticIpAddresses;
 
 	public String getId() {
 		return id;
@@ -157,12 +167,30 @@ public class BrokerProperties {
 		return this;
 	}
 
+	public boolean isEnableMulticastGroup() {
+		return enableMulticastGroup;
+	}
+
+	public BrokerProperties setEnableMulticastGroup(boolean enableMulticastGroup) {
+		this.enableMulticastGroup = enableMulticastGroup;
+		return this;
+	}
+
 	public String getMulticastGroup() {
 		return multicastGroup;
 	}
 
 	public BrokerProperties setMulticastGroup(String multicastGroup) {
 		this.multicastGroup = multicastGroup;
+		return this;
+	}
+
+	public String getStaticIpAddresses() {
+		return staticIpAddresses;
+	}
+
+	public BrokerProperties setStaticIpAddresses(String staticIpAddresses) {
+		this.staticIpAddresses = staticIpAddresses;
 		return this;
 	}
 }

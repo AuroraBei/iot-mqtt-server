@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 /**
  * 通过SpringBoot启动服务
  */
-@SpringBootApplication(scanBasePackages = {"cn.recallcode.mqtt"})
+@SpringBootApplication(scanBasePackages = {"cn.recallcode.iot.mqtt.server"})
 public class BrokerApplication {
 
 	public static void main(String[] args) {

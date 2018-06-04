@@ -21,10 +21,12 @@
 		<maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<iot-mqtt-server.version>1.0</iot-mqtt-server.version>
+		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+		<maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
+		<iot-mqtt-server.version>1.1</iot-mqtt-server.version>
 		<spring-boot.version>2.0.2.RELEASE</spring-boot.version>
 		<hutool.version>4.0.12</hutool.version>
-		<ignite.version>2.4.0</ignite.version>
+		<ignite.version>2.5.0</ignite.version>
 	</properties>
 	<!--依赖管理-->
 	<dependencyManagement>
@@ -46,6 +48,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.target}</target>
@@ -56,6 +59,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire-plugin.version}</version>
 				<configuration>
 					<skip>true</skip>
 				</configuration>

@@ -14,4 +14,4 @@ spring:
 logging:
         level:
                 root: info
-                cn.recallcode.mqtt: debug
+                cn.recallcode.iot.mqtt.server: debug
