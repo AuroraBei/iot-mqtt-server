@@ -8,7 +8,7 @@ spring:
         mqtt:
                 broker:
                         id: mqtt-broker-1
-                        ssl-cert-path: classpath:keystore/broker.pfx
+                        ssl-cert-path: keystore/broker.pfx
                         ssl-password: 123456
                         multicast-group: 239.255.255.255
 logging:

@@ -40,6 +40,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLEngine;
+import java.io.InputStream;
 import java.security.KeyStore;
 
 /**
@@ -75,7 +76,8 @@ public class BrokerServer {
 		workerGroup = brokerProperties.isUseEpoll() ? new EpollEventLoopGroup() : new NioEventLoopGroup();
 		handlerGroup = brokerProperties.isUseEpoll() ? new EpollEventLoopGroup() : new NioEventLoopGroup();
 		KeyStore keyStore = KeyStore.getInstance("PKCS12");
-		keyStore.load(this.getClass().getResourceAsStream(brokerProperties.getSslCertPath()), brokerProperties.getSslPassword().toCharArray());
+		InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(brokerProperties.getSslCertPath());
+		keyStore.load(inputStream, brokerProperties.getSslPassword().toCharArray());
 		KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
 		kmf.init(keyStore, brokerProperties.getSslPassword().toCharArray());
 		sslContext = SslContextBuilder.forServer(kmf).build();
