@@ -4,26 +4,32 @@
 
 package cn.recallcode.iot.mqtt.server.auth.util;
 
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.IoUtil;
-import cn.hutool.crypto.asymmetric.KeyType;
-import cn.hutool.crypto.asymmetric.RSA;
+import cn.hutool.crypto.SecureUtil;
 
+import java.security.KeyPair;
 import java.security.interfaces.RSAPrivateKey;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 /**
- * 测试阶段, 通过这里可以输入用户名获取对应的密码
+ * 私钥
  */
 public class RsaKeyUtil {
 
+	/**
+	 * 生成私钥文件
+	 */
 	public static void main(String[] args) {
 		System.out.println();
-		System.out.print("输入需要获取密码的用户名: ");
+		System.out.print("输入保存密钥文件的路径(如: f:/rsa/): ");
 		Scanner scanner = new Scanner(System.in);
-		String value = scanner.nextLine();
-		RSAPrivateKey privateKey = IoUtil.readObj(RsaKeyUtil.class.getClassLoader().getResourceAsStream("keystore/private.key"));
-		RSA rsa = new RSA(privateKey, null);
-		System.out.println("用户名: " + value + " 对应生成的密码为: " + rsa.encryptStr(value, KeyType.PrivateKey));
+		String path = scanner.nextLine();
+		KeyPair keyPair = SecureUtil.generateKeyPair("RSA", 512, LocalDateTime.now().toString().getBytes());
+		RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
+		String privatePath = path + "auth-private.key";
+		IoUtil.writeObjects(FileUtil.getOutputStream(privatePath), true, privateKey);
 	}
 
 }

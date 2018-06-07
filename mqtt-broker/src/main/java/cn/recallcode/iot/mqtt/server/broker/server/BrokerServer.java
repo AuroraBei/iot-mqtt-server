@@ -76,7 +76,7 @@ public class BrokerServer {
 		workerGroup = brokerProperties.isUseEpoll() ? new EpollEventLoopGroup() : new NioEventLoopGroup();
 		handlerGroup = brokerProperties.isUseEpoll() ? new EpollEventLoopGroup() : new NioEventLoopGroup();
 		KeyStore keyStore = KeyStore.getInstance("PKCS12");
-		InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(brokerProperties.getSslCertPath());
+		InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("keystore/mqtt-broker.pfx");
 		keyStore.load(inputStream, brokerProperties.getSslPassword().toCharArray());
 		KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
 		kmf.init(keyStore, brokerProperties.getSslPassword().toCharArray());

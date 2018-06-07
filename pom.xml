@@ -23,7 +23,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
 		<maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
-		<iot-mqtt-server.version>1.1</iot-mqtt-server.version>
+		<iot-mqtt-server.version>1.2</iot-mqtt-server.version>
 		<spring-boot.version>2.0.2.RELEASE</spring-boot.version>
 		<hutool.version>4.0.12</hutool.version>
 		<ignite.version>2.5.0</ignite.version>

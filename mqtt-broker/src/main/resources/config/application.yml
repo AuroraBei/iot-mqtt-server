@@ -8,10 +8,35 @@ spring:
         mqtt:
                 broker:
                         id: mqtt-broker-1
-                        ssl-cert-path: keystore/broker.pfx
                         ssl-password: 123456
+                        enable-multicast-group: true
                         multicast-group: 239.255.255.255
+                        cache:
+                                persistence-initial-size: 64
+                                persistence-max-size: 128
+                                not-persistence-initial-size: 64
+                                not-persistence-max-size: 128
 logging:
         level:
                 root: info
                 cn.recallcode.iot.mqtt.server: debug
+---
+# 生产环境
+spring:
+        profiles: prod
+        mqtt:
+                broker:
+                        id: mqtt-broker-1
+                        ssl-password: 123456
+                        use-epoll: true
+                        enable-multicast-group: false
+                        static-ip-addresses: 127.0.0.1
+                        cache:
+                                persistence-initial-size: 64
+                                persistence-max-size: 128
+                                not-persistence-initial-size: 64
+                                not-persistence-max-size: 128
+                                persistence-store-path: /opt/mqtt-broker/store
+logging:
+        level:
+                root: info

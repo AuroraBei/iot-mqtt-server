@@ -2,7 +2,7 @@
  * Copyright (c) 2018, Mr.Wang (recallcode@aliyun.com) All rights reserved.
  */
 
-package cn.recallcode.iot.mqtt.server.auth;
+package cn.recallcode.iot.mqtt.server.auth.service;
 
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.StrUtil;
@@ -33,7 +33,7 @@ public class AuthService implements IAuthService {
 
 	@PostConstruct
 	public void init() {
-		privateKey = IoUtil.readObj(AuthService.class.getClassLoader().getResourceAsStream("keystore/private.key"));
+		privateKey = IoUtil.readObj(AuthService.class.getClassLoader().getResourceAsStream("keystore/auth-private.key"));
 	}
 
 }
