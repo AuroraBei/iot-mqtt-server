@@ -36,7 +36,8 @@ spring:
                                 persistence-max-size: 128
                                 not-persistence-initial-size: 64
                                 not-persistence-max-size: 128
-                                persistence-store-path: /opt/mqtt-broker/store
+                                persistence-store-path: /opt/mqtt-broker/persistence
 logging:
         level:
-                root: info
+                root: warn
+                cn.recallcode.iot.mqtt.server: info

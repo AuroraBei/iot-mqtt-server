@@ -61,8 +61,6 @@ public class BrokerServer {
 
 	private EventLoopGroup workerGroup;
 
-	private EventLoopGroup handlerGroup;
-
 	private SslContext sslContext;
 
 	private Channel channel;
@@ -74,7 +72,6 @@ public class BrokerServer {
 		LOGGER.info("Initializing {} MQTT Broker ...", "[" + brokerProperties.getId() + "]");
 		bossGroup = brokerProperties.isUseEpoll() ? new EpollEventLoopGroup() : new NioEventLoopGroup();
 		workerGroup = brokerProperties.isUseEpoll() ? new EpollEventLoopGroup() : new NioEventLoopGroup();
-		handlerGroup = brokerProperties.isUseEpoll() ? new EpollEventLoopGroup() : new NioEventLoopGroup();
 		KeyStore keyStore = KeyStore.getInstance("PKCS12");
 		InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("keystore/mqtt-broker.pfx");
 		keyStore.load(inputStream, brokerProperties.getSslPassword().toCharArray());
@@ -120,7 +117,7 @@ public class BrokerServer {
 					channelPipeline.addLast("ssl", new SslHandler(sslEngine));
 					channelPipeline.addLast("decoder", new MqttDecoder());
 					channelPipeline.addLast("encoder", MqttEncoder.INSTANCE);
-					channelPipeline.addLast(handlerGroup, "broker", new BrokerHandler(protocolProcess));
+					channelPipeline.addLast("broker", new BrokerHandler(protocolProcess));
 				}
 			})
 			.option(ChannelOption.SO_BACKLOG, brokerProperties.getSoBacklog())
@@ -152,10 +149,10 @@ public class BrokerServer {
 					// 将HTTP消息进行压缩编码
 					channelPipeline.addLast("compressor ", new HttpContentCompressor());
 					channelPipeline.addLast("protocol", new WebSocketServerProtocolHandler(brokerProperties.getWebsocketPath(), "mqtt,mqttv3.1,mqttv3.1.1", true, 65536));
-					channelPipeline.addLast(handlerGroup, "mqttWebSocket", new MqttWebSocketCodec());
+					channelPipeline.addLast("mqttWebSocket", new MqttWebSocketCodec());
 					channelPipeline.addLast("decoder", new MqttDecoder());
 					channelPipeline.addLast("encoder", MqttEncoder.INSTANCE);
-					channelPipeline.addLast(handlerGroup, "broker", new BrokerHandler(protocolProcess));
+					channelPipeline.addLast("broker", new BrokerHandler(protocolProcess));
 				}
 			})
 			.option(ChannelOption.SO_BACKLOG, brokerProperties.getSoBacklog())
