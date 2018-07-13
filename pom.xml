@@ -53,6 +53,10 @@
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.target}</target>
 					<encoding>${project.build.sourceEncoding}</encoding>
+					<compilerArgs>
+						<!--编译保留参数名称-->
+						<arg>-parameters</arg>
+					</compilerArgs>
 				</configuration>
 			</plugin>
 			<!--跳过测试阶段插件-->
