@@ -26,7 +26,7 @@ public class PwdUtil {
 		String value = scanner.nextLine();
 		RSAPrivateKey privateKey = IoUtil.readObj(PwdUtil.class.getClassLoader().getResourceAsStream("keystore/auth-private.key"));
 		RSA rsa = new RSA(privateKey, null);
-		System.out.println("用户名: " + value + " 对应生成的密码为: " + rsa.encryptStr(value, KeyType.PrivateKey));
+		System.out.println("用户名: " + value + " 对应生成的密码为: " + rsa.encryptBcd(value, KeyType.PrivateKey));
 	}
 
 }
